@@ -18,15 +18,20 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="br.com.ufrgs.imuproject.CreateDatasetActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".SensorReadings" android:exported="false"></service>
+        <activity
+            android:name="br.com.ufrgs.imuproject.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <service android:name="br.com.ufrgs.imuproject.SensorReadings" android:exported="false"></service>
     </application>
 
 </manifest>

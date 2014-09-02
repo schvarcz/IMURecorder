@@ -1,12 +1,10 @@
-package com.example.imuproject.storage;
+package br.com.ufrgs.imuproject.storage;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import android.os.Environment;
-import android.util.Log;
 
 public class FileStorage {
 
@@ -52,29 +50,53 @@ public class FileStorage {
 		return false;
 	}
 	
-	public void writeValues(float values[], long timestamp)
+	public void writeValues(float values[], long timestamp) throws IOException
 	{
-		try {
-			for(float value: values)
-			{
-				currentFileBuffered.write(String.valueOf(value)+";");
-			}
-			currentFileBuffered.write(String.valueOf(timestamp)+";");
-			currentFileBuffered.newLine();
-		} catch (IOException e) {
-			e.printStackTrace();
+		StringBuilder line = new StringBuilder();
+		for(float value: values)
+		{
+			line.append(value);
+			line.append(";");
 		}
+
+		line.append(timestamp);
+		this.writeLine(line.toString());
+	}
+	
+	public void writeValues(float values[]) throws IOException
+	{
+		StringBuilder line = new StringBuilder();
+		for(float value: values)
+		{
+			line.append(value);
+			line.append(";");
+		}
+		this.writeLine(line.toString());
+	}
+	
+	public void write(String line) throws IOException
+	{
+		currentFileBuffered.write(line);
+	}
+	
+	public void writeLine(String line) throws IOException
+	{
+		this.write(line);
+		currentFileBuffered.newLine();
 	}
 	
 	public void close()
 	{
 		if (currentFileBuffered != null)
-		try {
-			currentFileBuffered.close();
-			currentFile = null;
-			currentFileBuffered = null;
-		} catch (IOException e) {
-			e.printStackTrace();
+		{
+			try {
+				currentFileBuffered.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
+		currentFile = null;
+		currentFileBuffered = null;
 	}
 }
