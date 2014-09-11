@@ -34,7 +34,7 @@ public class SlideToUnlock implements SeekBar.OnSeekBarChangeListener {
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		if(Math.abs(startProgress - progress) > 15)
+		if(Math.abs(startProgress - progress) > 25)
 		{
 			seekBar.setProgress(startProgress);
 		}

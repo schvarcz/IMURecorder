@@ -17,6 +17,8 @@ public class SensorData {
 
 	private float mGyroscope[] = {0.f,0.f,0.f};
 	private float mAccelerometer[] = {0.f,0.f,0.f};
+	private float mLinearAccelerations[] = {0.f,0.f,0.f};
+
 	private float mOrientation[] = {0.f,0.f,0.f};
 
 	private FileStorage mStorage = null;
@@ -51,6 +53,14 @@ public class SensorData {
 	public void setAccelerometer(float[] values)
 	{
 		mAccelerometer = values;
+	}
+	
+	public float[] getLinearAccelerations() {
+		return mLinearAccelerations;
+	}
+
+	public void setLinearAccelerations(float[] mLinearAccelerations) {
+		this.mLinearAccelerations = mLinearAccelerations;
 	}
 
 	public float[] getGyroscope() {
@@ -174,7 +184,7 @@ public class SensorData {
 	
 	public String getHeader()
 	{
-		return "systemNanoTime;utcMilliTime;latitude;longitude;altitude;speed;bearing;azimuth;pitch;roll;gyrx;gyry;gyrz;accx;accy;accz";
+		return "systemNanoTime;utcMilliTime;latitude;longitude;altitude;speed;bearing;azimuth;pitch;roll;gyrx;gyry;gyrz;accx;accy;accz;linear_accx;linear_accy;linear_accz";
 	}
 	
 	public String toString()
@@ -195,7 +205,10 @@ public class SensorData {
 				mGyroscope[2], //z
 				mAccelerometer[0], //x
 				mAccelerometer[1], //y
-				mAccelerometer[2]  //z
+				mAccelerometer[2],  //z
+				mLinearAccelerations[0], //x
+				mLinearAccelerations[1], //y
+				mLinearAccelerations[2]  //z
 		};
 		
 		StringBuilder ret = new StringBuilder();
