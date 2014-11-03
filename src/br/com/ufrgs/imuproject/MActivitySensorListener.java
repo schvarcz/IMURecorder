@@ -1,8 +1,8 @@
 package br.com.ufrgs.imuproject;
 
-import br.com.ufrgs.imuproject.storage.SensorData;
+import br.com.ufrgs.imuproject.storage.SensorInfo;
 
 public interface MActivitySensorListener {
 
-	public void updateActivity(SensorData sensorData); 
+	public void updateActivity(SensorInfo mSensorInfo); 
 }

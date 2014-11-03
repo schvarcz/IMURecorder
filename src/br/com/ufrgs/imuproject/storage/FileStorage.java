@@ -25,10 +25,10 @@ public class FileStorage {
 		return false;
 	}
 	
-	public boolean createDataset(String name)
+	public boolean createDataset(String name, String path)
 	{
-		File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-				,"");
+		File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+				,"Datasets/"+path);
 		if (!folder.exists() && !folder.mkdirs())
 		{
 			return false;

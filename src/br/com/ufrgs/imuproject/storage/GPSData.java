@@ -1,17 +1,16 @@
 package br.com.ufrgs.imuproject.storage;
 
 import java.io.IOException;
-
 import android.util.Log;
 
-public class SensorData {
+public class GPSData {
 	private SensorInfo mSensorInfo;
 
 	private FileStorage mStorage = null;
 
 	long lastToast = 0;
 	
-	public SensorData(FileStorage storage,SensorInfo sensorInfo)
+	public GPSData(FileStorage storage,SensorInfo sensorInfo)
 	{
 		mSensorInfo = sensorInfo;
 		mStorage = storage;
@@ -47,29 +46,19 @@ public class SensorData {
 	
 	public String getHeader()
 	{
-		return "systemNanoTime;azimuth;pitch;roll;gyrx;gyry;gyrz;accx;accy;accz;linear_accx;linear_accy;linear_accz";
+		return "systemNanoTime;utcMilliTime;latitude;longitude;altitude;speed;bearing";
 	}
 	
 	public String toString()
 	{
-		float mGyroscope[] = mSensorInfo.getGyroscope();
-		float mAccelerometer[] = mSensorInfo.getAccelerometer();
-		float mLinearAccelerations[] = mSensorInfo.getLinearAccelerations();
-
 		double values[] = {
 				mSensorInfo.getSystemNanoTime(),
-				mSensorInfo.getAzimuth(), //azimuth
-				mSensorInfo.getPitch(), //Pitch
-				mSensorInfo.getRoll(), //roll
-				mGyroscope[0], //x
-				mGyroscope[1], //y
-				mGyroscope[2], //z
-				mAccelerometer[0], //x
-				mAccelerometer[1], //y
-				mAccelerometer[2],  //z
-				mLinearAccelerations[0], //x
-				mLinearAccelerations[1], //y
-				mLinearAccelerations[2]  //z
+				mSensorInfo.getUtcMilliTime(),
+				mSensorInfo.getLatitude(),
+				mSensorInfo.getLongitude(),
+				mSensorInfo.getAltitude(),
+				mSensorInfo.getSpeed(),
+				mSensorInfo.getBearing()
 		};
 		
 		StringBuilder ret = new StringBuilder();

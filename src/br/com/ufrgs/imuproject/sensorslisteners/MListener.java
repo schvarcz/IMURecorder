@@ -3,16 +3,16 @@ package br.com.ufrgs.imuproject.sensorslisteners;
 import java.util.ArrayList;
 
 import br.com.ufrgs.imuproject.MActivitySensorListener;
-import br.com.ufrgs.imuproject.storage.SensorData;
+import br.com.ufrgs.imuproject.storage.SensorInfo;
 
 public class MListener {
 
-	SensorData mSensorData;
+	SensorInfo mSensorInfo;
 	ArrayList<MActivitySensorListener> mActivities = new ArrayList<MActivitySensorListener>();
 
-	public MListener(SensorData sensorData)
+	public MListener(SensorInfo sensorInfo)
 	{
-		mSensorData = sensorData;
+		mSensorInfo = sensorInfo;
 	}
 	public boolean addActivity(MActivitySensorListener activity)
 	{
@@ -28,7 +28,7 @@ public class MListener {
 	{
 		for(MActivitySensorListener activity: mActivities)
 		{
-			activity.updateActivity(mSensorData);
+			activity.updateActivity(mSensorInfo);
 		}
 	}
 	

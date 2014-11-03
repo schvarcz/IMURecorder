@@ -1,6 +1,7 @@
 package br.com.ufrgs.imuproject.sensorslisteners;
 
 import br.com.ufrgs.imuproject.storage.SensorData;
+import br.com.ufrgs.imuproject.storage.SensorInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,8 +12,11 @@ public class IMUListener extends MListener implements SensorEventListener {
 
 	float gravity[] = new float[3];
 	float geomagnetic[] = new float[3];
-	public IMUListener(SensorData sensorData) {
-		super(sensorData);
+	SensorData mSensorData;
+	
+	public IMUListener(SensorInfo sensorInfo, SensorData sensorData) {
+		super(sensorInfo);
+		mSensorData = sensorData;
 	}
 
 	@Override
@@ -20,16 +24,16 @@ public class IMUListener extends MListener implements SensorEventListener {
 		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
 		{
 			gravity = event.values;
-			mSensorData.setAccelerometer(event.values);
-			mSensorData.setSystemNanoTime(event.timestamp);
+			mSensorInfo.setAccelerometer(event.values);
+			mSensorInfo.setSystemNanoTime(event.timestamp);
 			this.updateOrientation();
 			mSensorData.saveData();
 			this.updateActivities();
 		}
 		else if (event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION)
 		{
-			mSensorData.setLinearAccelerations(event.values);
-			mSensorData.setSystemNanoTime(event.timestamp);
+			mSensorInfo.setLinearAccelerations(event.values);
+			mSensorInfo.setSystemNanoTime(event.timestamp);
 			mSensorData.saveData();
 			this.updateActivities();
 		}
@@ -41,8 +45,8 @@ public class IMUListener extends MListener implements SensorEventListener {
 		}
 		else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE)
 		{
-			mSensorData.setGyroscope(event.values);
-			mSensorData.setSystemNanoTime(event.timestamp);
+			mSensorInfo.setGyroscope(event.values);
+			mSensorInfo.setSystemNanoTime(event.timestamp);
 			mSensorData.saveData();
 			this.updateActivities();
 		}
@@ -50,7 +54,7 @@ public class IMUListener extends MListener implements SensorEventListener {
 		{
 			geomagnetic = event.values;
 			this.updateOrientation();
-			mSensorData.setSystemNanoTime(event.timestamp);
+			mSensorInfo.setSystemNanoTime(event.timestamp);
 			mSensorData.saveData();
 		}
 		else if (event.sensor.getType() == Sensor.TYPE_ORIENTATION)
@@ -78,7 +82,7 @@ public class IMUListener extends MListener implements SensorEventListener {
 			values[0] = (float)(values[0]*180./Math.PI);
 			values[1] = (float)(values[1]*180./Math.PI);
 			values[2] = (float)(values[2]*180./Math.PI);
-			mSensorData.setOrientation(values);
+			mSensorInfo.setOrientation(values);
 		}
 	}
 }

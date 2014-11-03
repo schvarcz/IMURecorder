@@ -8,13 +8,10 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import br.com.ufrgs.imuproject.sensorslisteners.MListener;
-import br.com.ufrgs.imuproject.storage.SensorData;
+import br.com.ufrgs.imuproject.storage.SensorInfo;
 
 import com.example.imuproject.R;
 
@@ -98,38 +95,38 @@ public class MainActivity extends Activity implements MActivitySensorListener {
 	};
 
 	@Override
-	public void updateActivity(SensorData sensorData) {
+	public void updateActivity(SensorInfo sensorInfo) {
 		StringBuilder msg = new StringBuilder();
-		float[] accelerometer = sensorData.getAccelerometer();
+		float[] accelerometer = sensorInfo.getAccelerometer();
 		msg.append("X: ");msg.append(accelerometer[0]);msg.append("\n");
 		msg.append("Y: ");msg.append(accelerometer[1]);msg.append("\n");
 		msg.append("Z: ");msg.append(accelerometer[2]);msg.append("\n");
 		textAccelerometer.setText(msg.toString());
 
 		msg = new StringBuilder();
-		float[] gyroscope = sensorData.getGyroscope();
+		float[] gyroscope = sensorInfo.getGyroscope();
 		msg.append("X: ");msg.append(gyroscope[0]);msg.append("\n");
 		msg.append("Y: ");msg.append(gyroscope[1]);msg.append("\n");
 		msg.append("Z: ");msg.append(gyroscope[2]);msg.append("\n");
 		textGyroscope.setText(msg.toString());
 		
 		msg = new StringBuilder();
-		float[] orientation = sensorData.getOrientation();
+		float[] orientation = sensorInfo.getOrientation();
 		msg.append("X: ");msg.append(orientation[0]);msg.append("\n");
 		msg.append("Y: ");msg.append(orientation[1]);msg.append("\n");
 		msg.append("Z: ");msg.append(orientation[2]);msg.append("\n");
 		textOrientation.setText(msg.toString());
 		
 		msg = new StringBuilder();
-		msg.append("Longitude: ");msg.append(sensorData.getLongitude());msg.append("\n");
-		msg.append("Latitude: ");msg.append(sensorData.getLatitude());msg.append("\n");
-		msg.append("Altitude: ");msg.append(sensorData.getAltitude());msg.append("\n");
-		msg.append("Speed: ");msg.append(sensorData.getSpeed());msg.append("\n");
-		msg.append("Bearing: ");msg.append(sensorData.getBearing());msg.append("\n");
-		msg.append("UtcMilliTime: ");msg.append(sensorData.getUtcMilliTime());msg.append("\n");
+		msg.append("Longitude: ");msg.append(sensorInfo.getLongitude());msg.append("\n");
+		msg.append("Latitude: ");msg.append(sensorInfo.getLatitude());msg.append("\n");
+		msg.append("Altitude: ");msg.append(sensorInfo.getAltitude());msg.append("\n");
+		msg.append("Speed: ");msg.append(sensorInfo.getSpeed());msg.append("\n");
+		msg.append("Bearing: ");msg.append(sensorInfo.getBearing());msg.append("\n");
+		msg.append("UtcMilliTime: ");msg.append(sensorInfo.getUtcMilliTime());msg.append("\n");
 		textGPS.setText(msg.toString());
 
-		textSystemTime.setText(String.valueOf(sensorData.getSystemNanoTime()));
+		textSystemTime.setText(String.valueOf(sensorInfo.getSystemNanoTime()));
 	}
 	
 }

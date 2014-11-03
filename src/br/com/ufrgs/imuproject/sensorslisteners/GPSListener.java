@@ -1,5 +1,6 @@
 package br.com.ufrgs.imuproject.sensorslisteners;
-import br.com.ufrgs.imuproject.storage.SensorData;
+import br.com.ufrgs.imuproject.storage.GPSData;
+import br.com.ufrgs.imuproject.storage.SensorInfo;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -8,16 +9,17 @@ import android.os.Bundle;
 public class GPSListener extends MListener implements LocationListener {
 
 	
-	
-	public GPSListener(SensorData sensorData) {
-		super(sensorData);
+	GPSData mGPSData;
+	public GPSListener(SensorInfo sensorInfo, GPSData gpsData) {
+		super(sensorInfo);
+		mGPSData = gpsData;
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		mSensorData.setSystemNanoTime(System.nanoTime());
-		mSensorData.setGPSInformation(location);
-		mSensorData.saveData();
+		mSensorInfo.setSystemNanoTime(System.nanoTime());
+		mSensorInfo.setGPSInformation(location);
+		mGPSData.saveData();
 		this.updateActivities();
 	}
 
